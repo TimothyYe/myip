@@ -4,7 +4,8 @@ use actix_web::{server, App, HttpRequest, Responder};
 fn greet(req: &HttpRequest) -> impl Responder {
     let conn = req.connection_info();
     let ip = conn.remote().unwrap();
-    format!("{}", &ip)
+    let v: Vec<&str> = ip.split(":").collect();
+    format!("{}", &v[0])
 }
 
 fn main() {
