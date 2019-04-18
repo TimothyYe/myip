@@ -1,11 +1,11 @@
 extern crate actix_web;
-use actix_web::{server, App, HttpRequest, Responder};
+use actix_web::{server, App, HttpRequest};
 
-fn index(req: &HttpRequest) -> impl Responder {
+fn index(req: &HttpRequest) -> String {
     let conn = req.connection_info();
     let ip = conn.remote().unwrap();
     let v: Vec<&str> = ip.split(":").collect();
-    format!("{}", &v[0])
+    v[0].to_string()
 }
 
 fn main() {
