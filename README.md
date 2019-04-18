@@ -1,6 +1,8 @@
 # myip
 An extremely simple Rust web application to get your public IP address.
 
+Visit [https://myip.biturl.top](https://myip.biturl.top) for example.
+
 ## Run
 
 ```bash
