@@ -21,6 +21,8 @@ cargo build --release
 docker run -d --name=myip --restart=always -p 8000:8000 timothyye/myip:latest
 ```
 
+Then, visit `http://your-host-url:8000` to get your IP.
+
 ## License
 
 [MIT License](https://github.com/TimothyYe/myip/blob/master/LICENSE)
