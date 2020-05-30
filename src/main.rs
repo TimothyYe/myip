@@ -4,9 +4,9 @@ use actix_web::{server, App, HttpRequest};
 fn index(req: &HttpRequest) -> String {
     if let Some(ip) = req.connection_info().remote() {
         let v: Vec<&str> = ip.split(":").collect();
-            return v[0].to_string()
-        }
-    
+        return v[0].to_string();
+    }
+
     String::from("")
 }
 
