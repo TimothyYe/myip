@@ -1,8 +1,7 @@
-extern crate actix_web;
-use actix_web::{server, App, HttpRequest};
+use actix_web::{web, HttpServer, App, HttpRequest, Responder};
 
-fn index(req: &HttpRequest) -> String {
-    if let Some(ip) = req.connection_info().remote() {
+async fn index(req: HttpRequest) -> impl Responder{
+    if let Some(ip) = req.connection_info().realip_remote_addr() {
         let v: Vec<&str> = ip.split(":").collect();
         return v[0].to_string();
     }
@@ -10,11 +9,17 @@ fn index(req: &HttpRequest) -> String {
     String::from("")
 }
 
-fn main() {
-    let addr = "0.0.0.0:8000";
-    println!("Server listening at: {}", addr);
-    server::new(|| App::new().resource("/", |r| r.f(index)))
-        .bind(addr)
-        .expect("Can not bind to port 8000")
-        .run();
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    let addr = "0.0.0.0";
+    let port = 8000;
+    println!("Server listening at: {}{}", addr, port);
+
+    HttpServer::new(|| {
+        App::new()
+            .route("/", web::get().to(index))
+    })
+    .bind((addr, port))?
+    .run()
+    .await
 }

@@ -5,4 +5,4 @@ authors = ["TimothyYe <yexiaozhou2003@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-actix-web = "0.7"
+actix-web = "3.3.2"
