@@ -2,7 +2,7 @@
 name = "myip"
 version = "0.1.0"
 authors = ["TimothyYe <yexiaozhou2003@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 actix-web = "4.1.0"
