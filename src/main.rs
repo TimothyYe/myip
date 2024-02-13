@@ -3,7 +3,11 @@ use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 async fn index(req: HttpRequest) -> impl Responder {
     if let Some(ip) = req.connection_info().realip_remote_addr() {
         let v: Vec<&str> = ip.split(":").collect();
-        return v[0].to_string();
+
+        if v.len() <= 2 {
+            return v[0].to_string();
+        }
+        return ip.to_string();
     }
 
     String::from("")
@@ -11,7 +15,7 @@ async fn index(req: HttpRequest) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let addr = "0.0.0.0";
+    let addr = "::";
     let port = 8000;
     println!("Server listening at: {}:{}", addr, port);
 
